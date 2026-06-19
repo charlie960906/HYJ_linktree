@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黃宥鈞(老黃) - Developer & HYJdevelop CEO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@0.454.0"></script>
+</head>
+<body>
+
+    <div id="spotify-modal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal()" aria-label="Close modal">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-header">
+                <i data-lucide="music" class="music-icon"></i>
+                <h3>My Music Playlist</h3>
+            </div>
+            <div class="iframe-container">
+                <iframe 
+                    title="Spotify Music Playlist"
+                    src="https://open.spotify.com/embed/playlist/6YWNbabDk7DFa4FTegLZSz?utm_source=generator&theme=0" 
+                    width="100%" 
+                    height="352" 
+                    frameborder="0" 
+                    allowfullscreen 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="profile-section">
+            <img src="myself.jpg" alt="Profile" class="profile-pic">
+            <h1>黃宥鈞(老黃)</h1>
+            <div class="subtitles">
+                <p class="title-main">Developer & HYJdevelop CEO</p>
+                <p class="title-sub">CYSH_IRC & 115學測生📖</p>
+            </div>
+            <p class="bio">I'm not the best, but I'm working hard</p>
+            <div class="location-badge">
+                <i data-lucide="building-2"></i>
+                <span>Chiayi, Taiwan</span>
+            </div>
+        </header>
+
+        <main class="links-section">
+            <a href="https://hyjdevelop.com" target="_blank" rel="noopener noreferrer" class="link-card delay-0">
+                <div class="link-content">
+                    <div class="icon-wrapper gradient-blue-purple">
+                        <i data-lucide="globe"></i>
+                    </div>
+                    <div class="text-content">
+                        <h3>Company website</h3>
+                        <p>View our Works</p>
+                    </div>
+                </div>
+                <i data-lucide="external-link" class="external-icon"></i>
+            </a>
+
+            <button onclick="openModal()" class="link-card delay-100">
+                <div class="link-content">
+                    <div class="icon-wrapper gradient-green">
+                        <i data-lucide="music"></i>
+                    </div>
+                    <div class="text-content">
+                        <h3>Music Playlist</h3>
+                        <p>Listen my favorite music on spotify</p>
+                    </div>
+                </div>
+                <i data-lucide="external-link" class="external-icon"></i>
+            </button>
+
+            <a href="https://hyjblog.hyjdevelop.com" target="_blank" rel="noopener noreferrer" class="link-card delay-200">
+                <div class="link-content">
+                    <div class="icon-wrapper gradient-orange-red">
+                        <i data-lucide="message-circle"></i>
+                    </div>
+                    <div class="text-content">
+                        <h3>Blog</h3>
+                        <p>Read my article</p>
+                    </div>
+                </div>
+                <i data-lucide="external-link" class="external-icon"></i>
+            </a>
+
+            <a href="mailto:charlie960906@gmail.com" class="link-card delay-300">
+                <div class="link-content">
+                    <div class="icon-wrapper gradient-indigo-blue">
+                        <i data-lucide="mail"></i>
+                    </div>
+                    <div class="text-content">
+                        <h3>Contact My email</h3>
+                        <p>Contact me by email</p>
+                    </div>
+                </div>
+                <i data-lucide="external-link" class="external-icon"></i>
+            </a>
+        </main>
+
+        <footer class="footer-section delay-500">
+            <h3 class="social-title">Social Links</h3>
+            <div class="social-links">
+                <a href="https://github.com/charlie960906" target="_blank" rel="noopener noreferrer" class="social-btn github-hover" aria-label="GitHub"><i data-lucide="github"></i></a>
+                <a href="https://www.facebook.com/hyjcharlie960906/" target="_blank" rel="noopener noreferrer" class="social-btn fb-hover" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                <a href="https://www.instagram.com/hyjcharlie960906/?hl=zh-tw" target="_blank" rel="noopener noreferrer" class="social-btn ig-hover" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                <a href="http://discordapp.com/users/961983502943911986" target="_blank" rel="noopener noreferrer" class="social-btn discord-hover" aria-label="Discord"><i data-lucide="gamepad-2"></i></a>
+            </div>
+            <div class="copyright">
+                <span>©2025</span> <strong>HYJdevelop</strong></span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        const modal = document.getElementById('spotify-modal');
+        function openModal() { modal.style.display = 'flex'; }
+        function closeModal() { modal.style.display = 'none'; }
+    </script>
+</body>
+</html>

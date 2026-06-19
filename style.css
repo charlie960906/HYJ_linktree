@@ -1,0 +1,284 @@
+/* --- 1. 全域變數設定 (預設淺色：奶油白) --- */
+:root {
+    --bg-color: #FAF9F6;
+    --card-bg: #FFFFFF;
+    --card-border: rgba(0, 0, 0, 0.05);
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --shadow-hover: rgba(0, 0, 0, 0.08);
+    --modal-overlay: rgba(0, 0, 0, 0.4);
+    --close-btn-bg: rgba(0, 0, 0, 0.05);
+    --close-btn-hover: rgba(0, 0, 0, 0.1);
+}
+
+/* --- 2. 系統深色模式 (Dark Mode) 自動變換 --- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #121212; /* 深色背景 */
+        --card-bg: #1E1E1E; /* 深色卡片 */
+        --card-border: rgba(255, 255, 255, 0.1);
+        --text-main: #F3F4F6; /* 亮白色文字 */
+        --text-muted: #9CA3AF; /* 淺灰色文字 */
+        --shadow-hover: rgba(0, 0, 0, 0.5); /* 陰影加深 */
+        --modal-overlay: rgba(0, 0, 0, 0.7);
+        --close-btn-bg: rgba(255, 255, 255, 0.1);
+        --close-btn-hover: rgba(255, 255, 255, 0.2);
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease; /* 切換模式時的漸變效果 */
+}
+
+/* 自訂捲軸 */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); }
+::-webkit-scrollbar-thumb { background: rgba(150, 150, 150, 0.3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(150, 150, 150, 0.5); }
+
+/* 容器與版面 */
+.container {
+    position: relative;
+    z-index: 10;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* 個人資訊區塊 */
+.profile-section {
+    animation: fadeInUp 0.6s ease-out forwards;
+    margin-bottom: 40px;
+}
+
+.profile-pic {
+    width: 140px; 
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid var(--card-bg); /* 外框跟隨主題 */
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-main);
+}
+
+.subtitles { margin-bottom: 15px; }
+.title-main { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
+.title-sub { font-size: 1rem; color: var(--text-muted); margin-top: 5px; }
+.bio { color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; }
+
+.location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    color: var(--text-main);
+}
+.location-badge svg { width: 16px; height: 16px; color: var(--text-muted); }
+
+/* 連結列表 */
+.links-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 48px;
+}
+.link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text-main);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: left;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+.link-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px var(--shadow-hover); /* 陰影跟隨主題 */
+}
+.link-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+}
+.icon-wrapper {
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+.link-card:hover .icon-wrapper { transform: scale(1.1) rotate(3deg); }
+.icon-wrapper svg { width: 20px; height: 20px; }
+
+/* 圖示漸層顏色 */
+.gradient-blue-purple { background: linear-gradient(to right, #3b82f6, #9333ea); }
+.gradient-green { background: linear-gradient(to right, #22c55e, #059669); }
+.gradient-orange-red { background: linear-gradient(to right, #f97316, #dc2626); }
+.gradient-indigo-blue { background: linear-gradient(to right, #6366f1, #2563eb); }
+
+.text-content h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; transition: color 0.2s; color: var(--text-main); }
+.link-card:hover .text-content h3 { color: #3b82f6; }
+.text-content p { font-size: 0.875rem; color: var(--text-muted); }
+
+/* --- 3. 旁邊的連結圖示轉動特效 --- */
+.external-icon { 
+    width: 20px; 
+    height: 20px; 
+    color: var(--text-muted); 
+    transition: all 0.5s ease; /* 增加轉動的時間讓它更滑順 */
+}
+/* Hover 時轉動 360 度並變色 */
+.link-card:hover .external-icon { 
+    color: #3b82f6; 
+    transform: rotate(360deg) scale(1.1); /* 轉動一圈並稍微放大 */
+}
+
+/* 底部社群區塊 */
+.footer-section { opacity: 0; animation: fadeInUp 0.6s ease-out forwards; }
+.social-title { font-size: 1.1rem; margin-bottom: 20px; font-weight: 600; color: var(--text-main); }
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.social-btn svg { width: 24px; height: 24px; }
+.social-btn:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 20px var(--shadow-hover); 
+    color: var(--text-main); 
+}
+
+.github-hover:hover { color: var(--text-main); }
+.fb-hover:hover { color: #3b82f6; }
+.ig-hover:hover { color: #ec4899; }
+.discord-hover:hover { color: #8b5cf6; }
+
+.copyright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Spotify 彈出視窗 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--modal-overlay); /* 背景變暗遮罩 */
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease-out;
+}
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 24px;
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: scaleIn 0.3s ease-out;
+}
+.close-btn {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: var(--close-btn-bg);
+    border: none;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, color 0.2s;
+}
+.close-btn:hover { 
+    background: var(--close-btn-hover); 
+    color: var(--text-main);
+}
+.modal-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 16px; color: var(--text-main);
+}
+.music-icon { color: #22c55e; width: 24px; height: 24px; }
+.modal-header h3 { font-size: 1.25rem; font-weight: 600; }
+.iframe-container { border-radius: 12px; overflow: hidden; }
+
+/* 關鍵影格動畫 */
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes scaleIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* 延遲類別 */
+.delay-0 { animation-delay: 0ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
